@@ -1,0 +1,18 @@
+gait_node:
+  ros__parameters:
+    rate: 100.0
+    thigh_length: 0.12
+    calf_length: 0.12
+    body_height: 0.155      # hip-to-foot-centre while walking [m]
+    step_height: 0.04
+    gait_period: 0.36       # full trot cycle [s]
+    duty_factor: 0.5
+    max_stride: 0.10
+    max_vx: 0.3
+    max_wz: 1.0
+    turn_gain: 4.0          # extra left/right stride difference to overcome skid when turning
+    turn_vx_comp: 0.35      # backward bias = turn_vx_comp * wz^2 (cancels forward creep while turning)
+    foot_x_offset: 0.0
+    cmd_timeout: 0.5
+    cmd_filter_tau: 0.15
+    stand_up_time: 2.0

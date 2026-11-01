@@ -1,0 +1,74 @@
+# ros_gz_bridge topic mapping (Gazebo Harmonic <-> ROS 2 Jazzy)
+- ros_topic_name: /clock
+  gz_topic_name: /clock
+  ros_type_name: rosgraph_msgs/msg/Clock
+  gz_type_name: gz.msgs.Clock
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /scan
+  gz_topic_name: /dog/scan
+  ros_type_name: sensor_msgs/msg/LaserScan
+  gz_type_name: gz.msgs.LaserScan
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /imu
+  gz_topic_name: /dog/imu
+  ros_type_name: sensor_msgs/msg/Imu
+  gz_type_name: gz.msgs.IMU
+  direction: GZ_TO_ROS
+
+# 3D simulator odometry; odom_footprint_node turns it into /odom + TF (odom -> base_footprint -> base_link)
+- ros_topic_name: /dog/odom_3d
+  gz_topic_name: /dog/odom
+  ros_type_name: nav_msgs/msg/Odometry
+  gz_type_name: gz.msgs.Odometry
+  direction: GZ_TO_ROS
+
+
+- ros_topic_name: /joint_states
+  gz_topic_name: /dog/joint_states
+  ros_type_name: sensor_msgs/msg/JointState
+  gz_type_name: gz.msgs.Model
+  direction: GZ_TO_ROS
+
+# joint position commands from the gait node
+- ros_topic_name: /dog/FL_thigh_joint/cmd_pos
+  gz_topic_name: /dog/FL_thigh_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/FL_calf_joint/cmd_pos
+  gz_topic_name: /dog/FL_calf_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/FR_thigh_joint/cmd_pos
+  gz_topic_name: /dog/FR_thigh_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/FR_calf_joint/cmd_pos
+  gz_topic_name: /dog/FR_calf_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/RL_thigh_joint/cmd_pos
+  gz_topic_name: /dog/RL_thigh_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/RL_calf_joint/cmd_pos
+  gz_topic_name: /dog/RL_calf_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/RR_thigh_joint/cmd_pos
+  gz_topic_name: /dog/RR_thigh_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ
+- ros_topic_name: /dog/RR_calf_joint/cmd_pos
+  gz_topic_name: /dog/RR_calf_joint/cmd_pos
+  ros_type_name: std_msgs/msg/Float64
+  gz_type_name: gz.msgs.Double
+  direction: ROS_TO_GZ

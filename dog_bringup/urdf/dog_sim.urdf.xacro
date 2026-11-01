@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!-- Simulation wrapper around dog_description/urdf/dog.urdf.
+     Adds Gazebo (Harmonic) joint position controllers, joint state / odometry
+     publishers, a 2D lidar and an IMU. The original URDF is left untouched. -->
+<robot name="dog" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find dog_description)/urdf/dog.urdf"/>
+
+  <xacro:property name="p_gain" value="40.0"/>
+  <!-- d_gain 0: velocity damping comes from the joint dynamics (set in sim.launch.py) -->
+  <xacro:property name="d_gain" value="0.0"/>
+  <xacro:property name="max_effort" value="5.0"/>
+
+  <!-- one PID position controller per joint, command topic /dog/<joint>/cmd_pos -->
+  <xacro:macro name="joint_pos_ctrl" params="joint">
+    <gazebo>
+      <plugin filename="gz-sim-joint-position-controller-system"
+              name="gz::sim::systems::JointPositionController">
+        <joint_name>${joint}</joint_name>
+        <topic>/dog/${joint}/cmd_pos</topic>
+        <p_gain>${p_gain}</p_gain>
+        <i_gain>0.0</i_gain>
+        <d_gain>${d_gain}</d_gain>
+        <cmd_max>${max_effort}</cmd_max>
+        <cmd_min>${-max_effort}</cmd_min>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="leg_sim" params="prefix">
+    <xacro:joint_pos_ctrl joint="${prefix}_thigh_joint"/>
+    <xacro:joint_pos_ctrl joint="${prefix}_calf_joint"/>
+    <!-- grippy feet -->
+    <gazebo reference="${prefix}_calf">
+      <mu1>0.9</mu1>
+      <mu2>0.9</mu2>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:leg_sim prefix="FL"/>
+  <xacro:leg_sim prefix="FR"/>
+  <xacro:leg_sim prefix="RL"/>
+  <xacro:leg_sim prefix="RR"/>
+
+  <gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
+      <topic>/dog/joint_states</topic>
+      <!-- default is every physics step (1 kHz); that floods the Python controllers and delayed
+           the 50 Hz RL policy timer by up to 130 ms -->
+      <update_rate>200</update_rate>
+    </plugin>
+
+    <!-- Odometry from the simulator (stands in for leg odometry / state estimation) -->
+    <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <odom_topic>/dog/odom</odom_topic>
+      <tf_topic>/dog/odom_tf</tf_topic>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <dimensions>3</dimensions>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="gpu_lidar">
+      <gz_frame_id>lidar_link</gz_frame_id>
+      <topic>/dog/scan</topic>
+      <update_rate>10</update_rate>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.25</min>
+          <max>8.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </lidar>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <sensor name="imu" type="imu">
+      <gz_frame_id>imu_link</gz_frame_id>
+      <topic>/dog/imu</topic>
+      <update_rate>100</update_rate>
+      <always_on>true</always_on>
+    </sensor>
+  </gazebo>
+
+</robot>

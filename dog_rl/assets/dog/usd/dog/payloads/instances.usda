@@ -1,0 +1,84 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.3.2"
+    }
+    endTimeCode = 1000000
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    startTimeCode = 0
+    upAxis = "Z"
+)
+
+def Scope "Instances"
+{
+    def Xform "base_link" (
+        prepend references = @./geometries.usd@</Geometries/base_link>
+    )
+    {
+        over "base_link" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/base_link/VisualMaterials/body_grey>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "body_grey" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/body_grey>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "thigh" (
+        prepend references = @./geometries.usd@</Geometries/thigh>
+    )
+    {
+        over "thigh" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/thigh/VisualMaterials/leg_dark>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "leg_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/leg_dark>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "calf" (
+        prepend references = @./geometries.usd@</Geometries/calf>
+    )
+    {
+        over "calf" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/calf/VisualMaterials/leg_dark>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "leg_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/leg_dark>
+            )
+            {
+            }
+        }
+    }
+}
+

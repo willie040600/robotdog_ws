@@ -1,0 +1,174 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.3.2"
+    }
+    defaultPrim = "dog"
+    endTimeCode = 1000000
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    startTimeCode = 0
+    subLayers = [
+        @./physics.usda@
+    ]
+    upAxis = "Z"
+)
+
+over "dog"
+{
+    over "Physics"
+    {
+        over "FL_thigh_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "FL_calf_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "FR_thigh_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "FR_calf_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "RL_thigh_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "RL_calf_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "RR_thigh_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        over "RR_calf_joint" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+        }
+
+        def MjcActuator "FL_thigh_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/FL_thigh_joint>
+        }
+
+        def MjcActuator "FL_calf_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/FL_calf_joint>
+        }
+
+        def MjcActuator "FR_thigh_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/FR_thigh_joint>
+        }
+
+        def MjcActuator "FR_calf_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/FR_calf_joint>
+        }
+
+        def MjcActuator "RL_thigh_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/RL_thigh_joint>
+        }
+
+        def MjcActuator "RL_calf_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/RL_calf_joint>
+        }
+
+        def MjcActuator "RR_thigh_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/RR_thigh_joint>
+        }
+
+        def MjcActuator "RR_calf_joint_actuator"
+        {
+            uniform double[] mjc:biasPrm = [0, -0.6981316804885864, -0.010471975430846214, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:biasType = "affine"
+            uniform double mjc:forceRange:max = 5
+            uniform double mjc:forceRange:min = -5
+            uniform double[] mjc:gainPrm = [0.6981316804885864, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            uniform token mjc:gainType = "fixed"
+            custom rel mjc:target
+            append rel mjc:target = </dog/Physics/RR_calf_joint>
+        }
+    }
+}
+

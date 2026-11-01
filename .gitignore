@@ -1,0 +1,51 @@
+# --- colcon / ROS 2 build output (workspace root only) ---
+/build/
+/install/
+/log/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- CMake (in-source builds) ---
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# --- RL training artifacts ---
+# Deployed policies live in dog_gait/policies/*.npz and stay tracked.
+# Raw checkpoints and experiment logs are large and reproducible.
+*.pt
+*.pth
+*.ckpt
+runs/
+wandb/
+events.out.tfevents.*
+
+# --- rosbag recordings ---
+rosbag2_*/
+*.db3
+*.mcap
+*.bag
+
+# --- Local / machine-specific config ---
+.claude/settings.local.json
+.vscode/
+.idea/
+.env
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
